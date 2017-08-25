@@ -1,0 +1,22 @@
+
+<view class="main-container">
+  <form bindsubmit="formSubmit">
+    <view class="title">
+      Login
+    </view>
+    <view class="form-section">
+      <label>username</label>
+      <input name="username" type="text" placeholder='input your username' />
+    </view>
+     <view class="form-section">
+      <label>password</label>
+      <input name="password" type="text" password placeholder='input your password' />
+    </view>
+
+    <view class="form-section footer">
+      <button type="primary" size="default" loading="{{}}"
+        disabled="{{}}" form-type="submit"> submit </button>
+    </view>
+  </form>
+</view>
+

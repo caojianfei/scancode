@@ -1,0 +1,32 @@
+.main-container {
+  padding: 10px;
+  height: 100vh;
+  background: #F5F5F5;
+
+}
+
+.title {
+  height: 150px;
+  /* background: #fff; */
+  width: 100%;
+  line-height: 150px;
+  text-align: center;
+}
+
+.form-section {
+  margin-top: 20px;
+}
+
+.form-section label {
+  font-size: 20px;
+  margin-bottom: 5rpx;
+  display: block;
+}
+
+.form-section input {
+  background: #ffffff;
+  height: 96rpx;
+  line-height: 96rpx;
+  padding-left: 20rpx;
+  border-radius: 5rpx;
+}
