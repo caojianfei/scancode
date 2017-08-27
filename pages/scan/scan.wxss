@@ -1,0 +1,31 @@
+.input-code {
+  margin-top: 230rpx;
+}
+.code-tip {
+  font-size: 14px;
+  color: #888888;
+  margin-left: 5px;
+}
+
+.code {
+  background: #ffffff;
+  margin-top: 10px;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.footer {
+  margin-top: 20px;
+  padding: 5px;
+  text-align: center;
+}
+
+.scan-button {
+  margin-right: 5px;
+  width: 100px;
+}
+
+.hexiao-button {
+  width: 100px;
+}
