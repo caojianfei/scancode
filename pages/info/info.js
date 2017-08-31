@@ -61,20 +61,5 @@ Page({
    */
   onShareAppMessage: function () {
     
-  },
-
-  scanCode: function () {
-    wx.scanCode({
-      success: function (res) {
-        
-      },
-
-      fail: function() {
-        wx.showToast({
-          title: 'error',
-          image: '../../images/error.png'
-        })
-      }
-    })
   }
 })

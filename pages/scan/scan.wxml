@@ -1,13 +1,9 @@
 <view class="container">
-  <view class="input-code">
-    <label class="code-tip">输入需要核销的码或者扫描二维码</label>
-    <input class="code" />
-  </view>
+  <view class="logo">
 
-  <view class="footer">
-    <button class="scan-button" bindtap="scanCode" type="primary" size="mini">扫码</button>
-    <button class="hexiao-button" type="primary" size="mini" disabled>核销</button>
   </view>
   
-
+  <view class="footer">
+    <button class="scan-button" bindtap="scanCode" type="primary" size="mini">扫码</button>
+  </view>
 </view>
