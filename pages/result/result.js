@@ -1,25 +1,35 @@
-
-var common = require('../../utils/common.js');
-//console.log(common);
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    image: '',
+    mainInfo: '',
+    secondInfo: '',
+    btnType: 'default'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var isLogin = common.checkLogin();
-    if (!isLogin) {
-      wx.redirectTo({
-        url: '/pages/index/index',
-      })
+    var code = options.code;
+    var msg = options.msg;
+    
+    if (code === 1) {
+      this.setData({
+        image: '../../images/WeUI-success.png',
+        mainInfo: '核销成功',
+        secondInfo: msg,
+        btnType: 'primary'
+      });
+    } else {
+      this.setData({
+        image: '../../images/WeUI-error.png',
+        mainInfo: '核销失败',
+        secondInfo: msg
+      });
     }
   },
 
@@ -34,7 +44,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //console.log(getCurrentPages());
+    
   },
 
   /**
@@ -72,22 +82,9 @@ Page({
     
   },
 
-  scanCode: function () {
-    wx.scanCode({
-      success: function (res) {
-        var code = res.result;
-        wx.navigateTo({
-          url: '/pages/info/info?code=' + code,
-        })
-        console.log(res)
-      },
-
-      fail: function() {
-        wx.showToast({
-          title: 'error',
-          image: '../../images/error.png'
-        })
-      }
+  back: function () {
+    wx.switchTab({
+      url: '/pages/scan/scan',
     })
   }
 })

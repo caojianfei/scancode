@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="icon">
+    <image src="{{image}}"></image>
+  </view>
+  <view class="info">
+    <view class="info-main">
+      {{mainInfo}}
+    </view>
+    <view class="info-second">
+      {{secondInfo}}
+    </view>
+  </view>
+  <view class="option">
+  <button type="{{btnType}}" bindtap="back">返回</button>
+  </view>
+
+</view>

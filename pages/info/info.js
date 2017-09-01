@@ -171,6 +171,10 @@ Page({
   },
 
   onFormSubmit: function (e) {
+    wx.showLoading({
+      title: 'loading....',
+      mask: true
+    })
     var data = e.detail.value;
     var consumNum = data.consum_num;
     var order = this.data.order;
@@ -183,24 +187,53 @@ Page({
       return false;
     }
 
-    //发起核销
-    
-
-
-  },
-
-  consum: function () {
-    var order = this.data.order;
-    var consumNum = order.consum_num || 0;
-    var canConsumNum = order.amount - consumNum;
-    //确认核销订单的份数
-    if (canConsumNum > 1) {
-      
+    if (consumNum < 1) {
+      wx.showToast({
+        title: '核销份数不得小于1',
+        image: '../../images/error.png'
+      })
+      return false;
     }
 
+    var param = {
+      order_id: order.id,
+      num: consumNum,
+      session_id: common.getSessionId()
+    }
 
-
-
-
+    //发起核销
+    wx.request({
+      url: api.consumOrder,
+      data: param,
+      method: 'POST',
+      dataType: 'json',
+      success: function (res) {
+        console.log(res);
+        var data = res.data;
+        if (data.code !== 1) {
+          // wx.showToast({
+          //   title: data.msg,
+          //   image: '../../images/error.png'
+          // })
+          if (data.code === 2000) {
+            common.loginLoseEfficacy();
+          }
+          wx.redirectTo({
+            url: '/pages/result/result?code=0&msg=' + data.msg,
+          })
+          return false;
+        } else {
+          wx.redirectTo({
+            url: '/pages/result/result?code=1&msg=核销成功',
+          })
+        }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '请求失败！',
+          image: '../../images/error.png'
+        })
+      }
+    })
   }
 })
