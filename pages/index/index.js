@@ -1,4 +1,7 @@
 
+var app = getApp();
+var api = app.config.api;
+
 Page({
 
   formSubmit: (e) => {
@@ -33,7 +36,7 @@ Page({
     })
 
     wx.request({
-      url: 'http://local.lpdchina.com/api/login/login.html',
+      url: api.login,
       data: formValues,
       method: 'POST',
       success: (res) => {
