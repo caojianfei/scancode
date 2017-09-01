@@ -1,17 +1,118 @@
+
+var app = getApp();
+var api = app.config.api;
+
+var common = require('../../utils/common.js');
+//console.log(common);
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    order: {},
+    canUse: true,
+    errorCode: null,
+    errorImage: null,
+    errorMsg: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var DATE = new Date();
+    var now = DATE.getTime();
+    var self = this;
+    var code = options.code;
+    if (!code) {
+      code = '46318944108768002CJF';
+    }
+    if (!code) {
+      wx.showToast({
+        title: 'query error!',
+        image: '../../images/error.png'
+      })
+    } else {
+      var url = api.getOrderInfo;
+      var param = {
+        code: code,
+        session_id: common.getSessionId()
+      };
+      wx.request({
+        url: url,
+        data: param,
+        method: 'POST',
+        dataType: 'json',
+        success:  (res) => {
+          //console.log(res);
+          //console.log(self.data);
+          var data = res.data;
+          if (data.code !== 1) {
+            wx.showToast({
+              title: data.msg,
+              image: '../../images/error.png',
+              mask: true
+            })
+            if (data.code === 2000) {
+              common.loginLoseEfficacy();
+            }
+          } else {
+            var order = data.data;
+            var consumNumRemainder = order.amount - order.consum_num;
+            order.consumNumRemainder = consumNumRemainder;
+            var errorCode = null, errorMsg = null, canUse = false,errorImage;
+            if (order.order_status !== 1 && order.order_status !== 3) {
+              errorCode = 1;
+              errorMsg = '不是待核销的订单';
+            }
+
+            if (order.validStartTimestamp > now) {
+              errorCode = 1;
+              errorMsg = '该订单还未生效';
+            }
+
+            if (order.validEndTimestamp < now) {
+              errorCode = 1;
+              errorMsg = '该订单已经过期';
+            }
+
+            if (!(order.consum_num < order.amount)) {
+              errorCode = 2;
+              errorMsg = '该订单已经核销完成';
+            }
+
+            if (errorCode === null && errorMsg === null) {
+              canUse = true;
+            }
+
+            if (errorCode === 1) {
+              errorImage = '../../images/error1.png';
+            }
+
+            if (errorCode === 2) {
+              errorImage = '../../images/forbidden.png';
+            }
+
+            self.setData({
+              canUse: canUse,
+              errorImage: errorImage,
+              errorCode: errorCode,
+              errorMsg: errorMsg,
+              order: order
+            })
+          
+          }
+        },
+        fail: function () {
+          wx.showToast({
+            title: 'query error!',
+            image: '../../images/error.png'
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -61,5 +162,45 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+
+  back: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  onFormSubmit: function (e) {
+    var data = e.detail.value;
+    var consumNum = data.consum_num;
+    var order = this.data.order;
+    var reminderConsumNum = order.amount - order.consum_num;
+    if (consumNum > reminderConsumNum) {
+      wx.showToast({
+        title: '核销份数不得大于可核销份数',
+        image: '../../images/error.png'
+      })
+      return false;
+    }
+
+    //发起核销
+    
+
+
+  },
+
+  consum: function () {
+    var order = this.data.order;
+    var consumNum = order.consum_num || 0;
+    var canConsumNum = order.amount - consumNum;
+    //确认核销订单的份数
+    if (canConsumNum > 1) {
+      
+    }
+
+
+
+
+
   }
 })

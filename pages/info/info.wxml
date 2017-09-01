@@ -1,0 +1,105 @@
+<view class="container">
+  <view class="info">
+    <view class="info-row">
+      <view class="info-row-title">
+        代理商：
+      </view>
+      <view class="info-row-content">
+        {{order.agent.identity_code}}
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        购票时间：
+      </view>
+      <view class="info-row-content">
+        {{order.create_time}}
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        生效时间：
+      </view>
+      <view class="info-row-content">
+        {{order.validStart}}
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        失效时间：
+      </view>
+      <view class="info-row-content">
+        {{order.validEnd}}
+      </view>
+    </view>
+  </view>
+  <view class="info">
+    <view class="info-row">
+      <view class="info-row-title">
+        项目编号：
+      </view>
+      <view class="info-row-content">
+        {{order.outerIdSKU}}
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        项目内容：
+      </view>
+      <view class="info-row-content">
+        金宫歌舞剧场人妖秀
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        门票详情：
+      </view>
+      <view class="info-row-content">
+        {{order.skuProperties}}
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        联系人：
+      </view>
+      <view class="info-row-content">
+        {{order.buyer}}
+      </view>
+    </view>
+    <view class="info-row">
+      <view class="info-row-title">
+        联系号码：
+      </view>
+      <view class="info-row-content">
+        {{order.mobile}}
+      </view>
+    </view>
+  </view>
+
+   <view wx:if="{{errorCode}}" class="status">
+    <image class="status-icon" src="{{errorImage}}"></image>
+    <view class="status-content">{{errorMsg}}</view>
+  </view> 
+  <form bindsubmit="onFormSubmit">
+    <view hidden="{{canUse && order.consumNumRemainder > 1 ? false : true}}">
+      <view class="consum-num">
+        <label>输入核销分数：</label>
+        <input name="consum_num" type="number" value="{{order.consumNumRemainder}}" />
+      </view>
+      <view class="consum-tip">
+        当前可核销分数【{{order.consumNumRemainder}}】，核销份数必须大于【1】且不大于【{{order.consumNumRemainder}}】
+      </view>
+    </view>
+    <view class="footer">
+      <block wx:if="{{canUse}}">
+        <view class="options">
+          <button class="turn-back" type="default" size="mini" bindtap="back">返回</button>
+          <button class="hexiao" type="primary" form-type="submit" size="mini" bindtap="consum">核销</button>
+        </view>
+      </block>
+      <block wx:if="{{canUse === false}}">
+        <button type="primary" bindtap="back">返回</button>
+      </block>
+    </view>
+  </form>
+</view>

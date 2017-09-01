@@ -1,3 +1,7 @@
+
+var common = require('../../utils/common.js');
+//console.log(common);
+
 Page({
 
   /**
@@ -11,7 +15,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var isLogin = common.checkLogin();
+    //console.log(isLogin);
+    if (!isLogin) {
+      wx.redirectTo({
+        url: '/pages/index/index',
+      })
+    }
   },
 
   /**
@@ -25,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    //console.log(getCurrentPages());
   },
 
   /**
@@ -66,7 +76,12 @@ Page({
   scanCode: function () {
     wx.scanCode({
       success: function (res) {
-        
+        var code = res.result;
+        wx.navigateTo({
+          url: '/pages/info/info?code=' + code,
+          //url: '/pages/info/info'
+        })
+        console.log(res)
       },
 
       fail: function() {

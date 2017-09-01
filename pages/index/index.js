@@ -38,19 +38,27 @@ Page({
       method: 'POST',
       success: (res) => {
         let data = res.data;
-        console.log(res);
         if (data.code === 1) {
-          wx.showModal({
-            title: 'success',
-            content: 'login success',
+          //console.log(res.data)
+          let user = data.data.user;
+          wx.setStorageSync('user', user);
+          wx.setStorageSync('session_id', data.data.session_id);
+          wx.showToast({
+            title: 'login success',
+            mask: true
           })
+          setTimeout(function () {
+            wx.switchTab({
+              url: '/pages/scan/scan',
+            })
+          }, 1000);
         } else {
           wx.showModal({
             title: 'error',
             content: data.msg ? data.msg : 'unknow error'
           })
+          wx.hideLoading();
         }
-        wx.hideLoading();
       },
       fail: () => {
         wx.showModal({
@@ -62,5 +70,5 @@ Page({
     })
   },
 
- 
+
 })

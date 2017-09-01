@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/info/info",
     "pages/scan/scan",
     "pages/order/order",
     "pages/index/index"
-    
   ],
   "window":{
     "backgroundTextStyle":"light",
