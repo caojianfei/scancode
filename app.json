@@ -12,25 +12,5 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Siamicon",
     "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "color": "#000000",
-    "selectedColor": "green",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "white",
-    "list": [
-      {
-        "pagePath": "pages/scan/scan",
-        "text": "scancode",
-        "iconPath": "images/icon_API.png",
-        "selectedIconPath": "images/icon_API_HL.png"
-      },
-      {
-        "pagePath": "pages/order/order",
-        "text": "orders",
-        "iconPath": "images/icon_component.png",
-        "selectedIconPath": "images/icon_component_HL.png"
-      }
-    ]
   }
 }

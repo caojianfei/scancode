@@ -16,8 +16,10 @@ Page({
   onLoad: function (options) {
     var code = options.code;
     var msg = options.msg;
+    console.log(code);
     
-    if (code === 1) {
+    if (code == 1) {
+      //console.log('核销成功');
       this.setData({
         image: '../../images/WeUI-success.png',
         mainInfo: '核销成功',
@@ -25,6 +27,7 @@ Page({
         btnType: 'primary'
       });
     } else {
+      //console.log('核销失败');
       this.setData({
         image: '../../images/WeUI-error.png',
         mainInfo: '核销失败',
@@ -83,7 +86,7 @@ Page({
   },
 
   back: function () {
-    wx.switchTab({
+    wx.redirectTo({
       url: '/pages/scan/scan',
     })
   }

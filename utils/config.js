@@ -1,5 +1,5 @@
 
-var host = 'http://www.siamiconqr.com';
+var host = 'https://www.siamiconqr.com';
 var api = {
   login: host + '/api/login/login.html',
   getOrderInfo: host + '/api/Order/getOrderInfo.html',

@@ -1,5 +1,13 @@
 <view class="container">
   <view class="info">
+  <view class="info-row">
+      <view class="info-row-title">
+        订单号：
+      </view>
+      <view class="info-row-content">
+        {{order.mainOrderId}}
+      </view>
+    </view>
     <view class="info-row">
       <view class="info-row-title">
         代理商：
@@ -47,7 +55,7 @@
         项目内容：
       </view>
       <view class="info-row-content">
-        金宫歌舞剧场人妖秀
+        {{order.product.content}}
       </view>
     </view>
     <view class="info-row">

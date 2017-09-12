@@ -26,9 +26,7 @@ Page({
     var now = DATE.getTime();
     var self = this;
     var code = options.code;
-    if (!code) {
-      code = '46318944108768002CJF';
-    }
+  
     if (!code) {
       wx.showToast({
         title: 'query error!',
@@ -165,8 +163,8 @@ Page({
   },
 
   back: function () {
-    wx.navigateBack({
-      delta: 1
+    wx.redirectTo({
+      url: '/pages/scan/scan',
     })
   },
 
@@ -211,10 +209,6 @@ Page({
         console.log(res);
         var data = res.data;
         if (data.code !== 1) {
-          // wx.showToast({
-          //   title: data.msg,
-          //   image: '../../images/error.png'
-          // })
           if (data.code === 2000) {
             common.loginLoseEfficacy();
           }

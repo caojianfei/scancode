@@ -50,8 +50,9 @@ Page({
             title: 'login success',
             mask: true
           })
+
           setTimeout(function () {
-            wx.switchTab({
+            wx.redirectTo({
               url: '/pages/scan/scan',
             })
           }, 1000);

@@ -76,8 +76,8 @@ Page({
     wx.scanCode({
       success: function (res) {
         var code = res.result;
-        wx.navigateTo({
-          url: '/pages/info/info?code=' + code,
+        wx.redirectTo({
+          url: '/pages/info/info?code=' + code
         })
         console.log(res)
       },
